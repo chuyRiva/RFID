@@ -21,10 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login/', function(Request $request) {
 	$credentials = $request->only('usuario', 'password');
-    return Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
+	Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
     ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
     ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
     ->first()->update(array('token' => 'asdasd'));
+
+    return Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
+    ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
+    ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
+    ->first();
 });
 
 Route::get('/usuarios/', function() {
