@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-Use App\Usuario;
+Use App\Models\Usuario;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', function(Request $request) {
+Route::post('/login/', function(Request $request) {
 	$credentials = $request->only('usuario', 'password');
     return Usuario::where('usuario', $credentials->usuario)->where('password', $credentials->password)->first();
 });
 
-Route::get('usuarios', function() {
+Route::get('/usuarios/', function() {
     return Usuario::all();
 });
 
