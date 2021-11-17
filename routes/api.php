@@ -22,7 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login/', function(Request $request) {
 	$credentials = $request->only('usuario', 'password');
     return Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
-    ->leftjoin('empresas as empresa', 'empresas.id', 'usuarios.empresa_id')
+    ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
+    ->select('empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo', 'usuarios.*')
     ->first();
 });
 
