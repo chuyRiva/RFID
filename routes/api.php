@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', function(Request $request) {
+Route::post('/login', function(Request $request) {
 	$credentials = $request->only('usuario', 'password');
     return Usuario::where('usuario', $credentials->usuario)->where('password', $credentials->password)->first();
 });
