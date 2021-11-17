@@ -24,3 +24,7 @@ Route::post('/login', function(Request $request) {
     return Usuario::where('usuario', $credentials->usuario)->where('password', $credentials->password)->first();
 });
 
+Route::get('/usuarios', function() {
+    return Usuario::all();
+});
+
