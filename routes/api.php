@@ -26,12 +26,12 @@ Route::post('/login/', function(Request $request) {
     ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
     ->first()->update(array('token' => getToken(16)));
 
-    $usuario = Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
+    $datau = Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
     ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
     ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
     ->first();
 
-    $response = getResponse($usuario,"Usuario correcto","Las credenciales no coinciden con ningún usuario");
+    $response = getResponse($datau,"Usuario correcto","Las credenciales no coinciden con ningún usuario");
 
     return response($response, 200);
 });
@@ -81,7 +81,9 @@ function getResponse($data,$msgs,$msgf){
 		$msg = $msgf;
 	}
 
-	$obj_r->data = $data;
+
+	//$obj_r = new array();
+	$obj_r->data = $json_array;
 	$obj_r->msg = $msg;
 	$obj_r->code = $code;
 
