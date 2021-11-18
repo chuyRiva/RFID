@@ -43,7 +43,7 @@ Route::post('/login/', function(Request $request) {
 
     $response = getResponse($datau,"Usuario correcto","Las credenciales no coinciden con ningún usuario");
 
-    return response($response, 200)
+    return response($response, $response->code)
     	->header('Content-Type', 'application/json');
 });
 
@@ -94,6 +94,7 @@ function getResponse($data,$msgs,$msgf){
 		}
 	}else{
 		$msg = $msgf;
+		$code = 400;
 	}
 	
 
