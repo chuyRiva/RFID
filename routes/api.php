@@ -74,13 +74,18 @@ function getToken($length)
 function getResponse($data,$msgs,$msgf){
 	$msg = "";
 	$code = 200;
-	if(count($data)>0){
+	$json_array  = json_decode($data, true);
+	if(count($json_array)>0){
 		$msg = $msgs;
 	}else{
 		$msg = $msgf;
 	}
 
-	$obj_r["data"] = $data;
-	$obj_r["msg"] = $data;
-	$obj_r["code"] = $code;
+	$obj_r->data = $data;
+	$obj_r->msg = $msg;
+	$obj_r->code = $code;
+
+	$myJSON = json_encode($obj_r);
+
+	return $myJSON;
 }
