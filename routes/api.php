@@ -8,7 +8,8 @@ Use App\Models\Usuario;
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
-|
+|	C-0
+|	bimbo sa de cv
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
@@ -27,7 +28,7 @@ Route::post('/login/', function(Request $request) {
     	->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
     	->first();
     
-    if(!$datau1->isEmpty){
+    if($datau1){
 		Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
 		    ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
 		    ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
