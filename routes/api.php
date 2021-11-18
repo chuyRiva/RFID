@@ -99,7 +99,7 @@ function getResponse($data,$msgs,$msgf){
 
 
 	//$obj_r = new array();
-	$obj_r['data'] = $json_array;
+	$obj_r['data'] = $data;
 	$obj_r['msg'] = $msg;
 	$obj_r['code'] = $code;
 
