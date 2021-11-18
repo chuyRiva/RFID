@@ -38,7 +38,7 @@ Route::post('/login/', function(Request $request) {
 
     $datau = Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
     ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
-    ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
+    ->select('usuarios.nombre','usuarios.email','usuarios.tipo_usuario','usuarios.activo','usuarios.token', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
     ->first();
 
     $response = getResponse($datau,"Usuario correcto","Las credenciales no coinciden con ningún usuario");
