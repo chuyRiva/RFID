@@ -33,7 +33,8 @@ Route::post('/login/', function(Request $request) {
 
     $response = getResponse($datau,"Usuario correcto","Las credenciales no coinciden con ningún usuario");
 
-    return response($response, 200);
+    return response($response, 200)
+    	->header('Content-Type', 'application/json');
 });
 
 Route::get('/usuarios/', function() {
