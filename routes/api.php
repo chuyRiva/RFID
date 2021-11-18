@@ -27,7 +27,7 @@ Route::post('/login/', function(Request $request) {
     	->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
     	->first();
     
-    if($datau1->count>0){
+    if(!$datau1->isEmpty){
 		Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
 		    ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
 		    ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
