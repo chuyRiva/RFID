@@ -85,12 +85,17 @@ function getToken($length)
 function getResponse($data,$msgs,$msgf){
 	$msg = "";
 	$code = 200;
-	$json_array  = json_decode($data, true);
-	if(count($json_array)>0){
-		$msg = $msgs;
+	if($data){
+		$json_array  = json_decode($data, true);
+		if(count($json_array)>0){
+			$msg = $msgs;
+		}else{
+			$msg = $msgf;
+		}
 	}else{
 		$msg = $msgf;
 	}
+	
 
 
 	//$obj_r = new array();
