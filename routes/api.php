@@ -26,14 +26,14 @@ Route::post('/login/', function(Request $request) {
     	->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
     	->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
     	->first();
-    $json_array  = json_decode($datau1, true);
-    if(count($json_array)>0){
-
+    
+    if($datau1->count>0){
+		Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
+		    ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
+		    ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
+		    ->first()->update(array('token' => getToken(16)));
     } 	
-    Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
-    ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
-    ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo')
-    ->first()->update(array('token' => getToken(16)));
+    
 
     $datau = Usuario::where('usuario', $credentials['usuario'])->where('password', $credentials['password'])
     ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
