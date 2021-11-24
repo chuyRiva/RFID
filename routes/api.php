@@ -69,7 +69,7 @@ Route::get('/activos/', function(Request $request) {
     return response($obj_r, $response['code'])
         ->header('Content-Type', 'application/json');
     }    
-    $response = getResponse($datdataaau,"ok","Algo salío mal al consultar los activos");
+    $response = getResponse($dataa,"ok","Algo salío mal al consultar los activos");
     $obj_r = json_encode($response);
     return response($obj_r, $response['code'])
         ->header('Content-Type', 'application/json');
