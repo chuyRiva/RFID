@@ -57,7 +57,7 @@ Route::get('/usuarios/', function() {
 Route::get('/activos/', function(Request $request) {
     $vars = $request->only('token');
     $dataa = Activo::all();
-    $datau1 = Usuario::where('token', $vars['token'])
+    $datau1 = Usuario::where('token', $vars)
         ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
         ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo');
 
