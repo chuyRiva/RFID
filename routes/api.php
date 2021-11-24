@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 Use App\Models\Usuario;
-
+Use App\Models\Activo;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -55,9 +55,20 @@ Route::get('/usuarios/', function() {
 
 
 Route::get('/activos/', function() {
-
+    $vars = $request->only('token');
     $dataa = Activo::all();
+    $datau1 = Usuario::where('token', $vars['token'])
+        ->leftjoin('empresas', 'empresas.id', 'usuarios.empresa_id')
+        ->select('usuarios.*', 'empresas.nombre AS nombre_empresa','empresas.color_primario','empresas.color_secundario','empresas.logo');
 
+    if($datau1){
+
+    }else{
+        $response = getResponse(null,"ok","Usuario inactivo");
+        $obj_r = json_encode($response);
+    return response($obj_r, $response['code'])
+        ->header('Content-Type', 'application/json');
+    }    
     $response = getResponse($datdataaau,"ok","Algo salío mal al consultar los activos");
     $obj_r = json_encode($response);
     return response($obj_r, $response['code'])
