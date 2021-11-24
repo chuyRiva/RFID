@@ -55,7 +55,13 @@ Route::get('/usuarios/', function() {
 
 
 Route::get('/activos/', function() {
-    return Activo::all();
+
+    $dataa = Activo::all();
+
+    $response = getResponse($datdataaau,"ok","Algo salío mal al consultar los activos");
+    $obj_r = json_encode($response);
+    return response($obj_r, $response['code'])
+        ->header('Content-Type', 'application/json');
 });
 
 function crypto_rand_secure($min, $max)
