@@ -53,6 +53,11 @@ Route::get('/usuarios/', function() {
     return Usuario::all();
 });
 
+
+Route::get('/activos/', function() {
+    return Activo::all();
+});
+
 function crypto_rand_secure($min, $max)
 {
     $range = $max - $min;
